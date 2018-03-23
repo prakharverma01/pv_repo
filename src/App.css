@@ -1,0 +1,86 @@
+
+
+.left {
+  width: 33.33%;
+  max-height: 350px;
+  overflow-y: scroll;
+  float: left;
+  text-align: center;
+  background-color: whitesmoke;
+  border-collapse: collapse;
+
+  
+}
+
+.middle {
+  width: 33.33%;
+  height: 350px;
+  overflow-y: scroll;
+  float: left;
+  text-align: center;
+  background-color: whitesmoke;
+  border-collapse: collapse;
+
+}
+
+.right {
+width: 33.33%;
+height: 350px;
+overflow-y: scroll;
+position: relative;
+float: right;
+text-align: center;
+background-color: whitesmoke;
+border-collapse: collapse;
+overflow-x:scroll;
+
+}
+
+.cls{
+border: black thin;
+background:white;
+}
+
+.cls2{
+  border: black solid;
+  background: pink;
+  }
+
+
+  table {
+    border: 10px solid white;
+    position: fixed;
+    bottom:.5in;
+    left: .5in;
+
+}
+
+.crud{
+  position: fixed;
+  bottom:.5in;
+  left: 5.5in;
+}
+
+.show{
+  position: fixed;
+  bottom:1.3in;
+  left: 10.5in;
+}
+
+.text{
+  fill: burlywood;
+  font-family: sans-serif;
+  font-weight: bold;
+}
+
+.fake-wid{
+  width:250%;
+}
+
+.labelText{
+  fill: black;
+  font-family: sans-serif;
+  font-size: 10px;
+  writing-mode:vertical-rl;
+
+}
