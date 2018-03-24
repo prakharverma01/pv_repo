@@ -12,17 +12,14 @@
                         html+="<option value='"+res.data.data[i][8]+"'>"+res.data.data[i][8]+"</option>"
                         }
                         document.getElementById('zipCode').innerHTML = html;
-                        //dList.push();
-                });    
-       
+                });           
         }                    
         render(){   
-                
-                        return ( 
-                                <div>
-                                 {this.getDropDownList()}       
-                                </div>                   
-                                );
+                return ( 
+                        <div>
+                                {this.getDropDownList()}       
+                        </div>                   
+                       );
                 }       
         }
                 

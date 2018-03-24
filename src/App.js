@@ -26,7 +26,6 @@ class App extends Component {
     this.mini2 = this.mini2.bind(this);
   }
 
-  /* two way binding functions */
   changeID(input){
     this.setState({
       givenID:input
@@ -59,44 +58,43 @@ class App extends Component {
 
   /* minimizing Functions */
   mini() {
-    this.setState(prevState => ({
-      isToggleOn: !prevState.isToggleOn
-    }));
-    if(this.state.isToggleOn===true)
-    document.getElementById('leftDiv').style.width=0;
-    else
-    document.getElementById('leftDiv').style.width="33.33%";
+      this.setState(prevState => ({
+        isToggleOn: !prevState.isToggleOn
+      }));
+      if(this.state.isToggleOn===true)
+      document.getElementById('leftDiv').style.width=0;
+      else
+      document.getElementById('leftDiv').style.width="33.33%";
   }
   mini1() {
-    this.setState(prevState => ({
-      isToggleOn1: !prevState.isToggleOn1
-    }));
-    if(this.state.isToggleOn1===true)
-    document.getElementById('midDiv').style.width=0;
-    else
-    document.getElementById('midDiv').style.width="33.33%";
+      this.setState(prevState => ({
+        isToggleOn1: !prevState.isToggleOn1
+      }));
+      if(this.state.isToggleOn1===true)
+      document.getElementById('midDiv').style.width=0;
+      else
+      document.getElementById('midDiv').style.width="33.33%";
   }
   mini2() {
-    this.setState(prevState => ({
-      isToggleOn2: !prevState.isToggleOn2
-    }));
-    if(this.state.isToggleOn2===true)
-    document.getElementById('rightDiv').style.width=0;
-    else
-    document.getElementById('rightDiv').style.width="33.33%";
+      this.setState(prevState => ({
+        isToggleOn2: !prevState.isToggleOn2
+      }));
+      if(this.state.isToggleOn2===true)
+      document.getElementById('rightDiv').style.width=0;
+      else
+      document.getElementById('rightDiv').style.width="33.33%";
   }
    /* end of minimizing Functions */
   getNewMsg(){
-      var Msg = prompt("Enter The New Reminder", "New Reminder");
-      if(Msg==null || Msg ==="")
-      {
-        alert("Enter A valid msg!!!")
-      }
-      else
-      {
-        console.log('ID==>',this.state.givenID,'New Msg==>',Msg)
-        {this.props.updMsg(this.state.givenID,Msg)}
-      }
+        var Msg = prompt("Enter The New Reminder", "New Reminder");
+        if(Msg==null || Msg ==="")
+        {
+          alert("Enter A valid msg!!!")
+        }
+        else
+        {
+          {this.props.updMsg(this.state.givenID,Msg)}
+        }
   }
 
 getZipCode(zipCode){
@@ -111,8 +109,6 @@ getZipCode(zipCode){
   for (let i=0;i<arr.length;i++)
   gText.push(res.data.meta.view.columns[arr[i]].name.substr(8).split(" ").join("\n"));
 
-  console.log(gText);
-
   for (let i=0;i<res.data.data.length;i++)
   {
     if (res.data.data[i][8] == zipCode)
@@ -121,34 +117,35 @@ getZipCode(zipCode){
         break;
     }
   }
+
   for(let i=0;i<arr.length;i++)
   {  
     gDetails.push((Math.round(parseFloat(res.data.data[found][arr[i]]) * 100)));
   }
 
-        d3.select("svg").remove();
-        var svg = d3.select("#graphHere").append("svg")
-                    .attr("height","10cm")
-                    .attr("width","100%");
+      d3.select("svg").remove();
+      var svg = d3.select("#graphHere").append("svg")
+                  .attr("height","10cm")
+                  .attr("width","100%");
 
-                    svg.selectAll("rect")
-                    .data(gDetails)
-                    .enter().append("rect")
-                    .attr("height", function(d, i) {return ((d))})
-                    .attr("width","40")
-                    .attr("x", function(d, i) {return (i * 60) + 60})
-                    .attr("y", function(d, i) {return 150 - (d)});
+                  svg.selectAll("rect")
+                  .data(gDetails)
+                  .enter().append("rect")
+                  .attr("height", function(d, i) {return ((d))})
+                  .attr("width","40")
+                  .attr("x", function(d, i) {return (i * 60) + 60})
+                  .attr("y", function(d, i) {return 150 - (d)});
 
-                    svg.selectAll("text")
-                    .data(gDetails)
-                    .enter().append("text")
-                    .text(function(d) {return d})
-                    .attr("class", "text")
-                    .attr("x", function(d, i) {return (i * 60) + 60})
-                    .attr("y", function(d, i) {return 145 - (d)}); 
+                  svg.selectAll("text")
+                  .data(gDetails)
+                  .enter().append("text")
+                  .text(function(d) {return d})
+                  .attr("class", "text")
+                  .attr("x", function(d, i) {return (i * 60) + 60})
+                  .attr("y", function(d, i) {return 145 - (d)}); 
 
-                    for(let index=0; index<gText.length; index++)
-                    {
+                  for(let index=0; index<gText.length; index++)
+                  {
                     svg.append("text").append("tspan")
                       .data(gText)
                       .attr("x", (index*60)+70)
@@ -156,10 +153,10 @@ getZipCode(zipCode){
                       .attr("dy", "10.35em")
                       .text(function(d) { return gText[index]  })
                       .attr("class","labelText");
-                    }   
-                        
+                  }                         
  });
 }
+
   render() {
         return (
     <div>        
@@ -179,7 +176,6 @@ getZipCode(zipCode){
                 <div className="fake-wid" id="graphHere"></div>       
             </div>        
             <Graph/>
-
               <table className="show">
                 <thead>
                   <tr>
@@ -192,13 +188,16 @@ getZipCode(zipCode){
             <table>
               <thead>
                 <tr>
-                  <th><input type="button" onClick={this.mini} value="_ newz"></input></th>
+                  <th> Minimizing options </th>
                 </tr>
                 <tr>
-                  <th><input type="button" onClick={this.mini1} value="_ CRUD"></input></th>
+                  <th><input type="button" onClick={this.mini} value="News"></input></th>
                 </tr>
                 <tr>
-                  <th><input type="button" onClick={this.mini2} value="_ Graph"></input></th>
+                  <th><input type="button" onClick={this.mini1} value="CRUD"></input></th>
+                </tr>
+                <tr>
+                  <th><input type="button" onClick={this.mini2} value="Graph"></input></th>
                 </tr>
               </thead>
             </table>
@@ -222,7 +221,7 @@ getZipCode(zipCode){
                 <br></br>  
 
                 <input type="button"
-                      value="add-Name-Msg"
+                      value="Add"
                       onClick={()=>{this.props.setName(this.state.givenName,this.state.givenMsg);this.cls("name");}}
                 />
 
@@ -238,14 +237,13 @@ getZipCode(zipCode){
                 <br></br> 
 
                 <input type="button"
-                value="delete-this-ID"
+                value="Delete"
                 onClick={()=>{this.props.delName(this.state.givenID);this.cls("ID");}}
                 />
                 <input type="button"
-                value="Update-Msg-For-ID"
+                value="Update"
                 onClick={()=>{this.cls("ID");this.getNewMsg();}}
-                />
-                
+                />   
             </div>
     </div>
         );
@@ -279,4 +277,5 @@ getZipCode(zipCode){
             }
           }
       };
-      export default  connect(mapStateToProps,mapDispatchToProps)(App);
+
+export default  connect(mapStateToProps,mapDispatchToProps)(App);
