@@ -1,5 +1,6 @@
 # pv_repo
 3 portlet view Using ReatJS-Redux
+
 The project has following feature :
 1)  The first view portlet pulls news from New york times evey 10th second using TimesWire API, (the API key is also included in the project). 
     It shows the top 7, and every time a new news comes in it highlights that specific news.
