@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import axios from 'axios';
-import * as d3 from "d3";
 import {connect} from 'react-redux'
 import logo from './logo.svg';
 import './App.css';
 import {News} from './components/news';
 import {Graph} from './components/graph';
+import {httpFetch} from './components/fetch';
+import {getZipCode} from './components/getZipCode';
 
 
 class App extends Component {
@@ -29,7 +29,7 @@ class App extends Component {
   changeID(input){
     this.setState({
       givenID:input
-    },console.log(input));
+    });
   }
 
   changeName(input){
@@ -85,76 +85,19 @@ class App extends Component {
       document.getElementById('rightDiv').style.width="33.33%";
   }
    /* end of minimizing Functions */
-  getNewMsg(){
-        var Msg = prompt("Enter The New Reminder", "New Reminder");
-        if(Msg==null || Msg ==="")
-        {
-          alert("Enter A valid msg!!!")
-        }
-        else
-        {
-          {this.props.updMsg(this.state.givenID,Msg)}
-        }
-  }
 
-getZipCode(zipCode){
- axios.get(`https://data.cityofnewyork.us/api/views/kku6-nxdu/rows.json?accessType=DOWNLOAD`)
- .then(res=>{
-  let gDetails=[];
-  let gText=[];
-  let found=0;
-  let arr=[11,13,15,19,21,23,25,27,29,31,37,39,41,47,49];
-  
+    getNewMsg(){
 
-  for (let i=0;i<arr.length;i++)
-  gText.push(res.data.meta.view.columns[arr[i]].name.substr(8).split(" ").join("\n"));
-
-  for (let i=0;i<res.data.data.length;i++)
-  {
-    if (res.data.data[i][8] == zipCode)
+    var Msg = prompt("Enter The New Reminder", "New Reminder");
+    if(Msg==null || Msg ==="")
     {
-        found=i;
-        break;
+      alert("Enter A valid msg!!!")
     }
-  }
+    else
+    {
+      {this.props.updMsg(this.state.givenID,Msg)}
+    }
 
-  for(let i=0;i<arr.length;i++)
-  {  
-    gDetails.push((Math.round(parseFloat(res.data.data[found][arr[i]]) * 100)));
-  }
-
-      d3.select("svg").remove();
-      var svg = d3.select("#graphHere").append("svg")
-                  .attr("height","10cm")
-                  .attr("width","100%");
-
-                  svg.selectAll("rect")
-                  .data(gDetails)
-                  .enter().append("rect")
-                  .attr("height", function(d, i) {return ((d))})
-                  .attr("width","40")
-                  .attr("x", function(d, i) {return (i * 60) + 60})
-                  .attr("y", function(d, i) {return 150 - (d)});
-
-                  svg.selectAll("text")
-                  .data(gDetails)
-                  .enter().append("text")
-                  .text(function(d) {return d})
-                  .attr("class", "text")
-                  .attr("x", function(d, i) {return (i * 60) + 60})
-                  .attr("y", function(d, i) {return 145 - (d)}); 
-
-                  for(let index=0; index<gText.length; index++)
-                  {
-                    svg.append("text").append("tspan")
-                      .data(gText)
-                      .attr("x", (index*60)+70)
-                      .attr("y", 100 / 2)
-                      .attr("dy", "10.35em")
-                      .text(function(d) { return gText[index]  })
-                      .attr("class","labelText");
-                  }                         
- });
 }
 
   render() {
@@ -180,7 +123,7 @@ getZipCode(zipCode){
                 <thead>
                   <tr>
                     <th> Select a Zip-Code </th>
-                    <th><select id="zipCode" onChange={(e)=>{this.getZipCode(e.target.value);}}></select></th>
+                    <th><select id="zipCode" onChange={(e)=>{getZipCode(e.target.value);}}></select></th>
                   </tr>
                 </thead>
               </table>
@@ -249,10 +192,10 @@ getZipCode(zipCode){
         );
       }
     }
+    
         const mapStateToProps = (state) =>{
-        return{
-          adding: state.reducer
-        }};
+            return state;
+        };
         const mapDispatchToProps = (dispatch) =>{
           return{
             setName: (name,msg) => {

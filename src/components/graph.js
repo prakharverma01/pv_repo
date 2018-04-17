@@ -1,11 +1,11 @@
         import React from "react";
         import * as d3 from "d3";
-        import axios from 'axios';
+        import {httpFetch} from './fetch';
         var dList=[];
         export class Graph extends React.Component {
         getDropDownList(){
 
-                axios.get(`https://data.cityofnewyork.us/api/views/kku6-nxdu/rows.json?accessType=DOWNLOAD`) 
+                httpFetch(`https://data.cityofnewyork.us/api/views/kku6-nxdu/rows.json?accessType=DOWNLOAD`) 
                 .then(res =>{
                         var html = "";
                         for (let i =0; i<res.data.data.length;i++){
